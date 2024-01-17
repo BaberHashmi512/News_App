@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       },
@@ -56,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.04,
             ),
-            SpinKitChasingDots(
+            const SpinKitChasingDots(
               color: Colors.blue,
               size: 40,
             )

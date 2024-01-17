@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   FilterList? selectedMenu;
   final format = DateFormat('MMMM dd, yyyy');
 
+  String name = 'bbc-news';
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width * 1;
@@ -43,19 +45,60 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           PopupMenuButton<FilterList>(
               initialValue: selectedMenu,
-              icon: Icon(
+              icon: const Icon(
                 Icons.more_vert,
                 color: Colors.black,
               ),
+              onSelected: (FilterList item){
+
+                if(FilterList.bbcNews.name == item.name){
+                  name = 'bbc-news' ;
+                }
+                if(FilterList.aryNews.name == item.name){
+                  name = "ary-news";
+                }
+                if(FilterList.alJazeera.name == item.name){
+                  name = "al-jazeera-english";
+                }
+                if(FilterList.independent.name == item.name){
+                  name = "independent";
+                }
+                if(FilterList.reuters.name == item.name){
+                  name = "reuters";
+                }
+                if(FilterList.cnn.name == item.name){
+                  name = "cnn";
+                }
+                setState(() {
+                  selectedMenu = item;
+                  print('SelectedMenu $selectedMenu');
+                });
+              },
               itemBuilder: (context) => <PopupMenuEntry<FilterList>>[
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: FilterList.bbcNews,
                       child: Text("BBC News"),
                     ),
-                    PopupMenuItem(
-                      value: FilterList.bbcNews,
+                    const PopupMenuItem(
+                      value: FilterList.aryNews,
                       child: Text("Ary News"),
                     ),
+                const PopupMenuItem(
+                  value: FilterList.independent,
+                  child: Text("Independent News"),
+                ),
+                const PopupMenuItem(
+                  value: FilterList.reuters,
+                  child: Text("Reuters News"),
+                ),
+                const PopupMenuItem(
+                  value: FilterList.cnn,
+                  child: Text("CNN News"),
+                ),
+                const PopupMenuItem(
+                  value: FilterList.alJazeera,
+                  child: Text("Al Jazeera News"),
+                ),
                   ])
         ],
       ),
@@ -65,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * .55,
             width: width,
             child: FutureBuilder<NewsChannelsHeadlinesModel>(
-              future: newsViewModel.fetchNewChannelHeadlinesAPi(),
+              future: newsViewModel.fetchNewChannelHeadlinesAPi(name),
               builder: (BuildContext context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -119,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(12)),
                                 child: Container(
                                   alignment: Alignment.bottomCenter,
-                                  padding: EdgeInsets.all(15),
+                                  padding: const EdgeInsets.all(15),
                                   height: height * .22,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,

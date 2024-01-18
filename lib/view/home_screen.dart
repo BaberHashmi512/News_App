@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news/models/news_channels_headlines_model.dart';
+import 'package:news/view/categories_screen.dart';
 import 'package:news/view_model/news_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoriesScreen()));
+          },
           icon: Image.asset(
             'images/category_icon.png',
             height: 30,
@@ -49,29 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.more_vert,
                 color: Colors.black,
               ),
-              onSelected: (FilterList item){
-
-                if(FilterList.bbcNews.name == item.name){
-                  name = 'bbc-news' ;
+              onSelected: (FilterList item) {
+                if (FilterList.bbcNews.name == item.name) {
+                  name = 'bbc-news';
                 }
-                if(FilterList.aryNews.name == item.name){
+                if (FilterList.aryNews.name == item.name) {
                   name = "ary-news";
                 }
-                if(FilterList.alJazeera.name == item.name){
+                if (FilterList.alJazeera.name == item.name) {
                   name = "al-jazeera-english";
                 }
-                if(FilterList.independent.name == item.name){
+                if (FilterList.independent.name == item.name) {
                   name = "independent";
                 }
-                if(FilterList.reuters.name == item.name){
+                if (FilterList.reuters.name == item.name) {
                   name = "reuters";
                 }
-                if(FilterList.cnn.name == item.name){
+                if (FilterList.cnn.name == item.name) {
                   name = "cnn";
                 }
                 setState(() {
                   selectedMenu = item;
-                  print('SelectedMenu $selectedMenu');
                 });
               },
               itemBuilder: (context) => <PopupMenuEntry<FilterList>>[
@@ -83,22 +84,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       value: FilterList.aryNews,
                       child: Text("Ary News"),
                     ),
-                const PopupMenuItem(
-                  value: FilterList.independent,
-                  child: Text("Independent News"),
-                ),
-                const PopupMenuItem(
-                  value: FilterList.reuters,
-                  child: Text("Reuters News"),
-                ),
-                const PopupMenuItem(
-                  value: FilterList.cnn,
-                  child: Text("CNN News"),
-                ),
-                const PopupMenuItem(
-                  value: FilterList.alJazeera,
-                  child: Text("Al Jazeera News"),
-                ),
+                    const PopupMenuItem(
+                      value: FilterList.independent,
+                      child: Text("Independent News"),
+                    ),
+                    const PopupMenuItem(
+                      value: FilterList.reuters,
+                      child: Text("Reuters News"),
+                    ),
+                    const PopupMenuItem(
+                      value: FilterList.cnn,
+                      child: Text("CNN News"),
+                    ),
+                    const PopupMenuItem(
+                      value: FilterList.alJazeera,
+                      child: Text("Al Jazeera News"),
+                    ),
                   ])
         ],
       ),
